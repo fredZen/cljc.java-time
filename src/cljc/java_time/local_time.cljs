@@ -142,6 +142,11 @@
   (^js/JSJoda.LocalTime [^js/JSJoda.LocalTime this ^int nano-of-second]
    (.withNano this nano-of-second)))
 
+(clojure.core/defn to-epoch-second
+  {:arglists (quote (["java.time.LocalTime" "java.time.LocalDate" "java.time.ZoneOffset"]))}
+  (^long [^js/JSJoda.LocalTime this ^js/JSJoda.LocalDate date ^js/JSJoda.ZoneOffset offset]
+   (.toEpochSecond this date offset)))
+
 (clojure.core/defn until
   {:arglists (quote (["java.time.LocalTime" "java.time.temporal.Temporal" "java.time.temporal.TemporalUnit"]))}
   (^long [^js/JSJoda.LocalTime this ^js/JSJoda.Temporal end-exclusive ^js/JSJoda.TemporalUnit unit]
@@ -219,6 +224,11 @@
   {:arglists (quote (["java.time.LocalTime" "java.time.LocalTime"]))}
   (^int [^js/JSJoda.LocalTime this ^js/JSJoda.LocalTime other]
    (.compareTo this other)))
+
+(clojure.core/defn of-instant
+  {:arglists (quote (["java.time.Instant" "java.time.ZoneId"]))}
+  (^js/JSJoda.LocalTime [^js/JSJoda.Instant instant ^js/JSJoda.ZoneId zone]
+   (js-invoke java.time.LocalTime "ofInstant" instant zone)))
 
 (clojure.core/defn to-nano-of-day
   {:arglists (quote (["java.time.LocalTime"]))}

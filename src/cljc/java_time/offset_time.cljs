@@ -146,6 +146,11 @@
   (^js/JSJoda.OffsetTime [^js/JSJoda.OffsetTime this ^int nano-of-second]
    (.withNano this nano-of-second)))
 
+(clojure.core/defn to-epoch-second
+  {:arglists (quote (["java.time.OffsetTime" "java.time.LocalDate"]))}
+  (^long [^js/JSJoda.OffsetTime this ^js/JSJoda.LocalDate date]
+   (.toEpochSecond this date)))
+
 (clojure.core/defn until
   {:arglists (quote (["java.time.OffsetTime" "java.time.temporal.Temporal" "java.time.temporal.TemporalUnit"]))}
   (^long [^js/JSJoda.OffsetTime this ^js/JSJoda.Temporal end-exclusive ^js/JSJoda.TemporalUnit unit]

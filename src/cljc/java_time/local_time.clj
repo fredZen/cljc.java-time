@@ -142,6 +142,11 @@
   (^java.time.LocalTime [^java.time.LocalTime this ^java.lang.Integer nano-of-second]
    (.withNano this nano-of-second)))
 
+(clojure.core/defn to-epoch-second
+  {:arglists (quote (["java.time.LocalTime" "java.time.LocalDate" "java.time.ZoneOffset"]))}
+  (^long [^java.time.LocalTime this ^java.time.LocalDate date ^java.time.ZoneOffset offset]
+   (.toEpochSecond this date offset)))
+
 (clojure.core/defn until
   {:arglists (quote (["java.time.LocalTime" "java.time.temporal.Temporal" "java.time.temporal.TemporalUnit"]))}
   (^long [^java.time.LocalTime this ^java.time.temporal.Temporal end-exclusive ^java.time.temporal.ChronoUnit unit]
@@ -231,6 +236,11 @@
   {:arglists (quote (["java.time.LocalTime" "java.time.LocalTime"]))}
   (^java.lang.Integer [^java.time.LocalTime this ^java.time.LocalTime other]
    (.compareTo this other)))
+
+(clojure.core/defn of-instant
+  {:arglists (quote (["java.time.Instant" "java.time.ZoneId"]))}
+  (^java.time.LocalTime [^java.time.Instant instant ^java.time.ZoneId zone]
+   (java.time.LocalTime/ofInstant instant zone)))
 
 (clojure.core/defn to-nano-of-day
   {:arglists (quote (["java.time.LocalTime"]))}

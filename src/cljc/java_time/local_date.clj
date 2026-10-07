@@ -7,6 +7,8 @@
 
 (def min java.time.LocalDate/MIN)
 
+(def epoch java.time.LocalDate/EPOCH)
+
 (clojure.core/defn minus-weeks
   {:arglists (quote (["java.time.LocalDate" "long"]))}
   (^java.time.LocalDate [^java.time.LocalDate this ^long weeks-to-subtract]
@@ -29,7 +31,7 @@
 
 (clojure.core/defn get-era
   {:arglists (quote (["java.time.LocalDate"]))}
-  (^java.time.chrono.Era [^java.time.LocalDate this]
+  (^java.time.chrono.IsoEra [^java.time.LocalDate this]
    (.getEra this)))
 
 (clojure.core/defn of
@@ -61,6 +63,14 @@
   {:arglists (quote (["java.time.LocalDate" "java.time.chrono.ChronoLocalDate"]))}
   (^java.lang.Boolean [^java.time.LocalDate this ^java.time.chrono.ChronoLocalDate other]
    (.isEqual this other)))
+
+(clojure.core/defn dates-until
+  {:arglists (quote (["java.time.LocalDate" "java.time.LocalDate"]
+                     ["java.time.LocalDate" "java.time.LocalDate" "java.time.Period"]))}
+  (^java.util.stream.Stream [^java.time.LocalDate this ^java.time.LocalDate end-exclusive]
+   (.datesUntil this end-exclusive))
+  (^java.util.stream.Stream [^java.time.LocalDate this ^java.time.LocalDate end-exclusive ^java.time.Period step]
+   (.datesUntil this end-exclusive step)))
 
 (clojure.core/defn get-year
   {:arglists (quote (["java.time.LocalDate"]))}
@@ -142,6 +152,11 @@
   {:arglists (quote (["java.time.LocalDate" "int"]))}
   (^java.time.LocalDate [^java.time.LocalDate this ^java.lang.Integer year]
    (.withYear this year)))
+
+(clojure.core/defn to-epoch-second
+  {:arglists (quote (["java.time.LocalDate" "java.time.LocalTime" "java.time.ZoneOffset"]))}
+  (^long [^java.time.LocalDate this ^java.time.LocalTime time ^java.time.ZoneOffset offset]
+   (.toEpochSecond this time offset)))
 
 (clojure.core/defn length-of-month
   {:arglists (quote (["java.time.LocalDate"]))}
@@ -267,6 +282,11 @@
   {:arglists (quote (["java.time.LocalDate"]))}
   (^java.time.Month [^java.time.LocalDate this]
    (.getMonth this)))
+
+(clojure.core/defn of-instant
+  {:arglists (quote (["java.time.Instant" "java.time.ZoneId"]))}
+  (^java.time.LocalDate [^java.time.Instant instant ^java.time.ZoneId zone]
+   (java.time.LocalDate/ofInstant instant zone)))
 
 (clojure.core/defn of-year-day
   {:arglists (quote (["int" "int"]))}

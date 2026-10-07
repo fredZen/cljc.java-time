@@ -11,6 +11,11 @@
   (^js/JSJoda.Duration [^js/JSJoda.Duration this ^long minutes-to-subtract]
    (.minusMinutes this minutes-to-subtract)))
 
+(clojure.core/defn truncated-to
+  {:arglists (quote (["java.time.Duration" "java.time.temporal.TemporalUnit"]))}
+  (^js/JSJoda.Duration [^js/JSJoda.Duration this ^js/JSJoda.TemporalUnit unit]
+   (.truncatedTo this unit)))
+
 (clojure.core/defn to-nanos
   {:arglists (quote (["java.time.Duration"]))}
   (^long [^js/JSJoda.Duration this]
@@ -56,6 +61,11 @@
   (^js/JSJoda.Duration [^js/JSJoda.Duration this ^int nano-of-second]
    (.withNanos this nano-of-second)))
 
+(clojure.core/defn to-nanos-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^int [^js/JSJoda.Duration this]
+   (.toNanosPart this)))
+
 (clojure.core/defn get-units
   {:arglists (quote (["java.time.Duration"]))}
   (^java.util.List [^js/JSJoda.Duration this]
@@ -95,19 +105,34 @@
    (.plus this amount-to-add unit)))
 
 (clojure.core/defn divided-by
-  {:arglists (quote (["java.time.Duration" "long"]))}
-  (^js/JSJoda.Duration [^js/JSJoda.Duration this ^long divisor]
-   (.dividedBy this divisor)))
+  {:arglists (quote (["java.time.Duration" "java.time.Duration"] ["java.time.Duration" "long"]))}
+  (^java.lang.Object [this arg0]
+   (.dividedBy ^js/JSJoda.Duration this arg0)))
 
 (clojure.core/defn plus-minutes
   {:arglists (quote (["java.time.Duration" "long"]))}
   (^js/JSJoda.Duration [^js/JSJoda.Duration this ^long minutes-to-add]
    (.plusMinutes this minutes-to-add)))
 
+(clojure.core/defn to-days-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^long [^js/JSJoda.Duration this]
+   (.toDaysPart this)))
+
+(clojure.core/defn to-millis-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^int [^js/JSJoda.Duration this]
+   (.toMillisPart this)))
+
 (clojure.core/defn to-string
   {:arglists (quote (["java.time.Duration"]))}
   (^java.lang.String [^js/JSJoda.Duration this]
    (.toString this)))
+
+(clojure.core/defn to-seconds-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^int [^js/JSJoda.Duration this]
+   (.toSecondsPart this)))
 
 (clojure.core/defn minus
   {:arglists (quote (["java.time.Duration" "java.time.Duration"]
@@ -126,6 +151,11 @@
   {:arglists (quote (["java.time.Duration" "long"]))}
   (^js/JSJoda.Duration [^js/JSJoda.Duration this ^long hours-to-add]
    (.plusHours this hours-to-add)))
+
+(clojure.core/defn to-minutes-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^int [^js/JSJoda.Duration this]
+   (.toMinutesPart this)))
 
 (clojure.core/defn plus-days
   {:arglists (quote (["java.time.Duration" "long"]))}
@@ -231,6 +261,16 @@
   {:arglists (quote (["java.time.Duration" "java.lang.Object"]))}
   (^boolean [^js/JSJoda.Duration this ^java.lang.Object other-duration]
    (.equals this other-duration)))
+
+(clojure.core/defn to-seconds
+  {:arglists (quote (["java.time.Duration"]))}
+  (^long [^js/JSJoda.Duration this]
+   (.toSeconds this)))
+
+(clojure.core/defn to-hours-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^int [^js/JSJoda.Duration this]
+   (.toHoursPart this)))
 
 (clojure.core/defn of-seconds
   {:arglists (quote (["long"] ["long" "long"]))}

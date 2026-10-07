@@ -10,6 +10,11 @@
   (^java.time.Duration [^java.time.Duration this ^long minutes-to-subtract]
    (.minusMinutes this minutes-to-subtract)))
 
+(clojure.core/defn truncated-to
+  {:arglists (quote (["java.time.Duration" "java.time.temporal.TemporalUnit"]))}
+  (^java.time.Duration [^java.time.Duration this ^java.time.temporal.ChronoUnit unit]
+   (.truncatedTo this unit)))
+
 (clojure.core/defn to-nanos
   {:arglists (quote (["java.time.Duration"]))}
   (^long [^java.time.Duration this]
@@ -55,6 +60,11 @@
   (^java.time.Duration [^java.time.Duration this ^java.lang.Integer nano-of-second]
    (.withNanos this nano-of-second)))
 
+(clojure.core/defn to-nanos-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^java.lang.Integer [^java.time.Duration this]
+   (.toNanosPart this)))
+
 (clojure.core/defn get-units
   {:arglists (quote (["java.time.Duration"]))}
   (^java.util.List [^java.time.Duration this]
@@ -94,19 +104,39 @@
    (.plus this amount-to-add unit)))
 
 (clojure.core/defn divided-by
-  {:arglists (quote (["java.time.Duration" "long"]))}
-  (^java.time.Duration [^java.time.Duration this ^long divisor]
-   (.dividedBy this divisor)))
+  {:arglists (quote (["java.time.Duration" "java.time.Duration"] ["java.time.Duration" "long"]))}
+  (^java.lang.Object [this arg0]
+   (clojure.core/cond
+     (clojure.core/and (clojure.core/instance? java.time.Duration arg0))
+       (clojure.core/let [divisor ^"java.time.Duration" arg0] (.dividedBy ^java.time.Duration this divisor))
+     (clojure.core/and (clojure.core/instance? java.lang.Long arg0))
+       (clojure.core/let [divisor (clojure.core/long arg0)] (.dividedBy ^java.time.Duration this divisor))
+     :else (throw (java.lang.IllegalArgumentException. "no corresponding java.time method with these args")))))
 
 (clojure.core/defn plus-minutes
   {:arglists (quote (["java.time.Duration" "long"]))}
   (^java.time.Duration [^java.time.Duration this ^long minutes-to-add]
    (.plusMinutes this minutes-to-add)))
 
+(clojure.core/defn to-days-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^long [^java.time.Duration this]
+   (.toDaysPart this)))
+
+(clojure.core/defn to-millis-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^java.lang.Integer [^java.time.Duration this]
+   (.toMillisPart this)))
+
 (clojure.core/defn to-string
   {:arglists (quote (["java.time.Duration"]))}
   (^java.lang.String [^java.time.Duration this]
    (.toString this)))
+
+(clojure.core/defn to-seconds-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^java.lang.Integer [^java.time.Duration this]
+   (.toSecondsPart this)))
 
 (clojure.core/defn minus
   {:arglists (quote (["java.time.Duration" "java.time.Duration"]
@@ -125,6 +155,11 @@
   {:arglists (quote (["java.time.Duration" "long"]))}
   (^java.time.Duration [^java.time.Duration this ^long hours-to-add]
    (.plusHours this hours-to-add)))
+
+(clojure.core/defn to-minutes-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^java.lang.Integer [^java.time.Duration this]
+   (.toMinutesPart this)))
 
 (clojure.core/defn plus-days
   {:arglists (quote (["java.time.Duration" "long"]))}
@@ -230,6 +265,16 @@
   {:arglists (quote (["java.time.Duration" "java.lang.Object"]))}
   (^java.lang.Boolean [^java.time.Duration this ^java.lang.Object other-duration]
    (.equals this other-duration)))
+
+(clojure.core/defn to-seconds
+  {:arglists (quote (["java.time.Duration"]))}
+  (^long [^java.time.Duration this]
+   (.toSeconds this)))
+
+(clojure.core/defn to-hours-part
+  {:arglists (quote (["java.time.Duration"]))}
+  (^java.lang.Integer [^java.time.Duration this]
+   (.toHoursPart this)))
 
 (clojure.core/defn of-seconds
   {:arglists (quote (["long"] ["long" "long"]))}

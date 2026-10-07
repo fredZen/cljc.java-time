@@ -8,6 +8,8 @@
 
 (def min (goog.object/get java.time.LocalDate "MIN"))
 
+(def epoch (goog.object/get java.time.LocalDate "EPOCH"))
+
 (clojure.core/defn minus-weeks
   {:arglists (quote (["java.time.LocalDate" "long"]))}
   (^js/JSJoda.LocalDate [^js/JSJoda.LocalDate this ^long weeks-to-subtract]
@@ -30,7 +32,7 @@
 
 (clojure.core/defn get-era
   {:arglists (quote (["java.time.LocalDate"]))}
-  (^js/JSJoda.Era [^js/JSJoda.LocalDate this]
+  (^js/JSJoda.IsoEra [^js/JSJoda.LocalDate this]
    (.era this)))
 
 (clojure.core/defn of
@@ -47,6 +49,14 @@
   {:arglists (quote (["java.time.LocalDate" "java.time.chrono.ChronoLocalDate"]))}
   (^boolean [^js/JSJoda.LocalDate this ^js/JSJoda.ChronoLocalDate other]
    (.isEqual this other)))
+
+(clojure.core/defn dates-until
+  {:arglists (quote (["java.time.LocalDate" "java.time.LocalDate"]
+                     ["java.time.LocalDate" "java.time.LocalDate" "java.time.Period"]))}
+  (^java.util.stream.Stream [^js/JSJoda.LocalDate this ^js/JSJoda.LocalDate end-exclusive]
+   (.datesUntil this end-exclusive))
+  (^java.util.stream.Stream [^js/JSJoda.LocalDate this ^js/JSJoda.LocalDate end-exclusive ^js/JSJoda.Period step]
+   (.datesUntil this end-exclusive step)))
 
 (clojure.core/defn get-year
   {:arglists (quote (["java.time.LocalDate"]))}
@@ -128,6 +138,11 @@
   {:arglists (quote (["java.time.LocalDate" "int"]))}
   (^js/JSJoda.LocalDate [^js/JSJoda.LocalDate this ^int year]
    (.withYear this year)))
+
+(clojure.core/defn to-epoch-second
+  {:arglists (quote (["java.time.LocalDate" "java.time.LocalTime" "java.time.ZoneOffset"]))}
+  (^long [^js/JSJoda.LocalDate this ^js/JSJoda.LocalTime time ^js/JSJoda.ZoneOffset offset]
+   (.toEpochSecond this time offset)))
 
 (clojure.core/defn length-of-month
   {:arglists (quote (["java.time.LocalDate"]))}
@@ -241,6 +256,11 @@
   {:arglists (quote (["java.time.LocalDate"]))}
   (^js/JSJoda.Month [^js/JSJoda.LocalDate this]
    (.month this)))
+
+(clojure.core/defn of-instant
+  {:arglists (quote (["java.time.Instant" "java.time.ZoneId"]))}
+  (^js/JSJoda.LocalDate [^js/JSJoda.Instant instant ^js/JSJoda.ZoneId zone]
+   (js-invoke java.time.LocalDate "ofInstant" instant zone)))
 
 (clojure.core/defn of-year-day
   {:arglists (quote (["int" "int"]))}

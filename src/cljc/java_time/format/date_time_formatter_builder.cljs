@@ -180,6 +180,15 @@
    [^js/JSJoda.DateTimeFormatterBuilder this ^js/JSJoda.FormatStyle date-style ^js/JSJoda.FormatStyle time-style]
    (.appendLocalized this date-style time-style)))
 
+(clojure.core/defn append-generic-zone-text
+  {:arglists (quote (["java.time.format.DateTimeFormatterBuilder" "java.time.format.TextStyle"]
+                     ["java.time.format.DateTimeFormatterBuilder" "java.time.format.TextStyle" "java.util.Set"]))}
+  (^js/JSJoda.DateTimeFormatterBuilder [^js/JSJoda.DateTimeFormatterBuilder this ^js/JSJoda.TextStyle text-style]
+   (.appendGenericZoneText this text-style))
+  (^js/JSJoda.DateTimeFormatterBuilder
+   [^js/JSJoda.DateTimeFormatterBuilder this ^js/JSJoda.TextStyle text-style ^java.util.Set preferred-zones]
+   (.appendGenericZoneText this text-style preferred-zones)))
+
 (clojure.core/defn append-offset
   {:arglists (quote (["java.time.format.DateTimeFormatterBuilder" "java.lang.String" "java.lang.String"]))}
   (^js/JSJoda.DateTimeFormatterBuilder

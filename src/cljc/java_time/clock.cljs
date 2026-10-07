@@ -54,6 +54,11 @@
   (^js/JSJoda.ZoneId [^js/JSJoda.Clock this]
    (.zone this)))
 
+(clojure.core/defn tick-millis
+  {:arglists (quote (["java.time.ZoneId"]))}
+  (^js/JSJoda.Clock [^js/JSJoda.ZoneId zone]
+   (js-invoke java.time.Clock "tickMillis" zone)))
+
 (clojure.core/defn hash-code
   {:arglists (quote (["java.time.Clock"]))}
   (^int [^js/JSJoda.Clock this]

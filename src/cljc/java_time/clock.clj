@@ -53,6 +53,11 @@
   (^java.time.ZoneId [^java.time.Clock this]
    (.getZone this)))
 
+(clojure.core/defn tick-millis
+  {:arglists (quote (["java.time.ZoneId"]))}
+  (^java.time.Clock [^java.time.ZoneId zone]
+   (java.time.Clock/tickMillis zone)))
+
 (clojure.core/defn hash-code
   {:arglists (quote (["java.time.Clock"]))}
   (^java.lang.Integer [^java.time.Clock this]
